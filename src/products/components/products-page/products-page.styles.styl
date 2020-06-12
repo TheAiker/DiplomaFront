@@ -1,0 +1,53 @@
+.products-page
+    &__wrapper
+        display flex
+        flex-wrap wrap
+        min-height 600px
+        margin-bottom 4em
+
+    &__categories
+        flex 1
+        min-width 200px
+        margin-bottom 4em
+        padding 0 1em
+
+        &-title
+            margin-bottom 8px
+            line-height 16px
+            font-size 14px
+            color #ccc
+            user-select none
+
+    &__category
+        padding 0.5em 0.5em 0.5em 0
+        line-height 20px
+        font-size 18px
+        font-weight 400
+        cursor pointer
+        user-select none
+
+        &--selected
+            font-weight 700
+            cursor initial
+
+    &__products
+        flex 5
+        max-width 1240px
+
+        &-search
+            margin-left 2em
+
+            & .text-field__input
+                width 240px
+                max-width calc(100% - 2em)
+                transition width 0.3s ease-in
+
+                &:focus
+                    width 100%
+
+        &-wrapper
+            display flex
+            justify-content flex-start
+            flex-wrap wrap
+            max-width 1240px
+            padding 1em

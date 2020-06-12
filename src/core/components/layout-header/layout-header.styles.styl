@@ -1,0 +1,72 @@
+.layout-header
+    position fixed
+    top 0
+    left 0
+    width 100vw
+    height 45px
+    color #eee
+    background-color #333
+    box-shadow 0 0 4px rgba(0,0,0,0.05)
+    user-select none
+    overflow hidden
+
+    &__wrapper
+        display flex
+        align-items center
+        justify-content space-between
+        max-width 1440px
+        margin 0 auto
+        padding 0 20px
+
+        & > *
+            flex 1
+
+            &:not(:first-child):not(:last-child)
+                display flex
+                justify-content center
+
+            &:last-child
+                display flex
+                justify-content flex-end
+
+    &__title
+        padding 0.5em 1em
+        font-size 20px
+        font-weight bold
+
+        & > span
+            color #e83a3a
+
+    &__link-group
+        display flex
+        align-items center
+
+    &__link
+    &__link:visited
+        color white
+        text-decoration none
+
+    &__link
+        padding 0.75em 1em
+
+        &:hover
+            background-color #444
+
+        &--selected
+            color red
+
+    &__shopping-cart
+        padding 0.25em 1em
+
+        &-link
+        &-link:visited
+            display flex
+            align-items center
+            color #eee
+            text-decoration none
+
+        &-nudge
+            margin-left 0.5em
+            padding 0 0.25em
+            border-radius 6px
+            background-color #777

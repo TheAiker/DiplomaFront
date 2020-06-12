@@ -1,0 +1,32 @@
+.about-us
+    display flex
+    flex-direction column
+    align-items center
+    max-width 1440px
+    padding 1em
+
+    &__info
+        margin-bottom 1em
+
+        &-title
+            width 400px
+            padding-bottom 8px
+            margin-bottom 8px
+            line-height 28px
+            font-size 24px
+            font-weight 700
+            border-bottom 1px solid #eee
+
+    &__feedback
+        width 100%
+
+        &-title
+            display block
+            margin-bottom 0.5em
+            font-weight bold
+
+        &-field .text-field__input
+            min-width 300px
+
+        &-field:last-of-type .text-field__input
+            min-height 120px
