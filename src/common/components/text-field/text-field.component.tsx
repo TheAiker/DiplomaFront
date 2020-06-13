@@ -10,7 +10,7 @@ export type TTextFieldProps = {
     placeholder?: string;
     onChange?: (value: string) => void;
     textArea?: boolean;
-    type?: 'text' | 'search';
+    type?: 'text' | 'password' | 'search';
     value?: string;
 };
 

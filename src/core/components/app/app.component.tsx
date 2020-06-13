@@ -22,7 +22,14 @@ export function App(): JSX.Element {
                 </Switch>
             </HashRouter>
 
-            <ToastContainer autoClose={3000} newestOnTop position="bottom-right" />
+            <ToastContainer
+                autoClose={3000}
+                hideProgressBar
+                newestOnTop
+                pauseOnFocusLoss={false}
+                pauseOnHover={false}
+                position="bottom-right"
+            />
         </>
     );
 }
