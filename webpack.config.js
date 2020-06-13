@@ -6,6 +6,8 @@ module.exports = {
 
     entry: root('src/main'),
 
+    devtool: 'source-map',
+
     output: {
         path: root('dist/'),
         filename: 'app.[contenthash].js'
