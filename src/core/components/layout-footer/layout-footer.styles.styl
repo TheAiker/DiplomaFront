@@ -5,22 +5,43 @@
     &__wrapper
         min-width 960px
         max-width 1440px
-        height 120px
+        height 96px
         margin auto
         display flex
         justify-content space-between
-        padding 2em 20px 1em
         overflow hidden
 
     &__contacts
-        display block
+        display flex
+        align-items center
+        padding 0 20px
+
+    &__admin-access
+        display flex
+        padding 2em 20px 1em
+
+    &__link
+    &__link:visited
+        text-decoration none
+        color white
+
+    &__link
+        display flex
+        height 30px
+        align-items center
+        padding 0 1em
+
+        &:hover
+            background-color #444
 
     &__external-links
         display flex
-
+        justify-content space-between
+        padding 2em 20px 1em
 
     &__external-link
-        margin 0.8em
+        width 48px
+        margin 0 0.25em
 
     &__feedback
         height 40px

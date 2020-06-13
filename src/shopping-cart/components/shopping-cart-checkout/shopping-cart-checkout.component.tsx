@@ -12,7 +12,7 @@ export type ShoppingCartCheckoutProps = {
 export function ShoppingCartCheckout(props: ShoppingCartCheckoutProps): JSX.Element {
     const { cartItems } = props;
     const productsSum = useMemo(() => {
-        return cartItems.reduce((acc: number, item: TShoppingItem) => acc + item.product.price * item.amount, 0);
+        return cartItems.reduce((acc: number, item: TShoppingItem) => acc + (item.product.price * item.amount), 0);
     }, [cartItems]);
     const shipmentSum = productsSum * shippingTax;
     const totalSum = productsSum + shipmentSum;

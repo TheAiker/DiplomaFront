@@ -12,8 +12,8 @@ import './products-page.styles';
 const allProductsCategory = new CategoryModel(-1, 'Все продукты');
 
 export function ProductsPage(): JSX.Element {
-    const categories = useObservable(() => categoryService.categories$, []);
-    const products = useObservable(() => productService.products$, []);
+    const categories = useObservable(categoryService.categories$, []);
+    const products = useObservable(productService.products$, []);
     const [searchText, setSearchText] = useState('');
     const [selectedCategory, setSelectedCategory] = useState<CategoryModel>(allProductsCategory);
     const allCategories = [allProductsCategory, ...categories];
@@ -28,41 +28,39 @@ export function ProductsPage(): JSX.Element {
     }, [products]);
 
     return(
-        <LayoutFull withBanner>
-            <div className="products-page__wrapper">
-                <div className="products-page__categories">
-                    <div className="products-page__categories-title">Фильтруйте по категориям</div>
+        <div className="products-page__wrapper">
+            <div className="products-page__categories">
+                <div className="products-page__categories-title">Фильтруйте по категориям</div>
 
-                    <div>
-                        {allCategories.map((category: CategoryModel) => (
-                            <ProductsPageCategory
-                                category={category}
-                                key={category.id}
-                                selectCategory={setSelectedCategory}
-                                selected={category.id === selectedCategory.id}
-                            />
-                        ))}
-                    </div>
-                </div>
-
-                <div className="products-page__products">
-                    <TextField
-                        className="products-page__products-search"
-                        label="Поиск"
-                        name="productSearchFilter"
-                        placeholder={searchPlaceholder}
-                        onChange={setSearchText}
-                        type="search"
-                    />
-
-                    <div className="products-page__products-wrapper">
-                        {filteredProducts.map((product: ProductModel) => (
-                            <Product key={product.id} product={product} />
-                        ))}
-                    </div>
+                <div>
+                    {allCategories.map((category: CategoryModel) => (
+                        <ProductsPageCategory
+                            category={category}
+                            key={category.id}
+                            selectCategory={setSelectedCategory}
+                            selected={category.id === selectedCategory.id}
+                        />
+                    ))}
                 </div>
             </div>
-        </LayoutFull>
+
+            <div className="products-page__products">
+                <TextField
+                    className="products-page__products-search"
+                    label="Поиск"
+                    name="productSearchFilter"
+                    placeholder={searchPlaceholder}
+                    onChange={setSearchText}
+                    type="search"
+                />
+
+                <div className="products-page__products-wrapper">
+                    {filteredProducts.map((product: ProductModel) => (
+                        <Product key={product.id} product={product} />
+                    ))}
+                </div>
+            </div>
+        </div>
     );
 }
 

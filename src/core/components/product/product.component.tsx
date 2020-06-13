@@ -2,6 +2,7 @@ import { ProductModel } from 'common/models';
 import { shoppingListService } from 'common/services';
 import React, { useCallback } from 'react';
 import { toast } from 'react-toastify';
+import { formatMoney } from 'utils';
 import './product.styles';
 
 export type TProductProps = {
@@ -22,7 +23,7 @@ export function Product(props: TProductProps): JSX.Element {
 
             <div className="product__info">
                 <span className="product__info-name">{product.name}</span>
-                <span className="product__info-price">${product.price.toFixed(2)}</span>
+                <span className="product__info-price">${formatMoney(product.price)}</span>
             </div>
         </div>
     );

@@ -1,5 +1,6 @@
 import { AdminPage } from 'admin/components/admin-page';
 import { AboutUsPage } from 'core/components/about-us-page';
+import { LayoutFull } from 'core/components/layout-full';
 import { ProductsPage } from 'products/components/products-page';
 import React from 'react';
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
@@ -10,16 +11,18 @@ export function App(): JSX.Element {
     return (
         <>
             <HashRouter>
-                <Switch>
-                    <Route path="/" exact>
-                        <Redirect to="/products" />
-                    </Route>
+                <LayoutFull>
+                    <Switch>
+                        <Route path="/" exact>
+                            <Redirect to="/products" />
+                        </Route>
 
-                    <Route path="/about-us" component={AboutUsPage} />
-                    <Route path="/admin" component={AdminPage} />
-                    <Route path="/products" component={ProductsPage} />
-                    <Route path="/shopping-cart" component={ShoppingCartPage} />
-                </Switch>
+                        <Route path="/about-us" component={AboutUsPage} />
+                        <Route path="/admin" component={AdminPage} />
+                        <Route path="/products" component={ProductsPage} />
+                        <Route path="/shopping-cart" component={ShoppingCartPage} />
+                    </Switch>
+                </LayoutFull>
             </HashRouter>
 
             <ToastContainer

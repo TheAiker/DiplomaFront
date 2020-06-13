@@ -5,7 +5,7 @@ import './about-us.styles'
 
 export function AboutUsPage(): JSX.Element  {
     return(
-        <LayoutFull withBanner>
+        <>
             <div className="about-us">
                 <div className="about-us__info">
                     <div className="about-us__info-title">История проекта</div>
@@ -50,14 +50,14 @@ export function AboutUsPage(): JSX.Element  {
                             className="about-us__feedback-field"
                             label="ФИО"
                             name="name"
-                            placeholder="Петросян Евгений Ваганович"
+                            placeholder="Иван Иванович Иванов"
                         />
 
                         <TextField
                             className="about-us__feedback-field"
                             label="Сообщение"
                             name="comment"
-                            placeholder="Чё как живётся, агалы?"
+                            placeholder="Ваше сообщение"
                             textArea
                         />
 
@@ -66,6 +66,6 @@ export function AboutUsPage(): JSX.Element  {
                 </div>
 
             </div>
-        </LayoutFull>
+        </>
     );
 }

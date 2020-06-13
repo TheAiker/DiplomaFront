@@ -1,16 +1,16 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
-export function useObservable<T>(source: Observable<T> | (() => Observable<T>), defaultValue: T): T {
-    const source$ = useMemo(() => source instanceof Function ? source() : source, [source]);
+export function useObservable<T>(source$: Observable<T>, defaultValue: T, dependencies: Array<unknown> = []): T {
     const [value, setValue] = useState<T>(defaultValue);
 
     useEffect(() => {
-        const subscription = source$.subscribe((value: T) => setValue(() => value));
+        const subscription = source$.subscribe((v: T) => {
+            setValue(() => v);
+        });
 
         return () => subscription.unsubscribe();
-    }, []);
+    }, [source$, ...dependencies]);
 
     return value;
 }

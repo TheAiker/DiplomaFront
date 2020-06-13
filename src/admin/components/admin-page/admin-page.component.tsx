@@ -13,18 +13,14 @@ export function AdminPage(): JSX.Element {
         setHasAuthorized(() => true);
     }, []);
 
-    return (
-        <LayoutFull>
-            {hasAuthorized ? (
-                <div className="admin-page__wrapper">
-                    <AdminCreateCategory />
-                    <AdminCreateProduct />
-                </div>
-            ) : (
-                <div className="admin-page__wrapper">
-                    <AdminLogin onSuccess={onAuthorizationSuccessHandler} />
-                </div>
-            )}
-        </LayoutFull>
+    return hasAuthorized ? (
+        <div className="admin-page__wrapper">
+            <AdminCreateCategory />
+            <AdminCreateProduct />
+        </div>
+    ) : (
+        <div className="admin-page__wrapper">
+            <AdminLogin onSuccess={onAuthorizationSuccessHandler} />
+        </div>
     );
 }

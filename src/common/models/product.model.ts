@@ -1,5 +1,6 @@
 import { TCategory, TImage, TProduct } from 'common/types';
 import { deserialize, JsonName, JsonNameReadonly } from 'tserialize';
+import { formatMoney } from 'utils';
 
 const fallbackProductImage = require('assets/images/fallback-product-preview.png');
 
@@ -30,6 +31,10 @@ export class ProductModel {
 
     static fromServer(data: TProduct): ProductModel {
         return deserialize(data, ProductModel);
+    }
+
+    get prettyPrice(): string {
+        return formatMoney(this.price);
     }
 
     get productPreviewURL(): string {

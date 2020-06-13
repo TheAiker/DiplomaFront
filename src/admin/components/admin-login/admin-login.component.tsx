@@ -25,8 +25,6 @@ export function AdminLogin(props: TAdminLoginProps): JSX.Element {
 
         const hashedPassword = encodeSHA256(password).toString();
 
-        console.debug('compare passwords', prehashedPassword, hashedPassword);
-
         if (hashedPassword === prehashedPassword) {
             adminAuthService.isAuthorized = true;
             onSuccess();

@@ -8,8 +8,6 @@ export class ProductTransport {
     async createProduct(request: TCreateProductRequest): Promise<ProductModel> {
         const { data: { data } } = await axios.post<TCreateProductResponse>('/api/products/create', request);
 
-        console.debug('create product result', data);
-
         return ProductModel.fromServer(data);
     }
 

@@ -1,13 +1,12 @@
 .shopping-cart-item
     display flex
     align-items center
-    max-width 1440px
-    max-height 1440px
+    max-height 120px
     margin-bottom 1em
-    padding 0.5em 0
+    padding 0 0
 
     &__preview
-        max-width 200px
+        max-width 120px
         margin-right 2em
         border-radius 6px
 
@@ -22,10 +21,35 @@
             margin-top 20px
             color gray
 
-    &__amount
-        margin 80px 0px 0px 400px
-        border 1px solid red
+    &__actions
+        display flex
+        align-items center
+        justify-content flex-end
 
-    &__delete
-        margin 70px 0px 0px 400px
-        border 1px solid red
+        &-amount
+            max-width 75px
+            margin 1em
+            line-height 18px
+            font-size 16px
+
+        &-total
+            mix-width 75px
+            margin 1em
+            line-height 18px
+            font-size 16px
+            font-weight 700
+
+        &-delete
+            display flex
+            justify-content center
+            align-items center
+            padding 0.25em
+            cursor pointer
+            border-radius 3px
+
+            &:hover
+            &:focus
+                background-color #c7c7c7
+
+            &:active
+                background-color #d4d4d4

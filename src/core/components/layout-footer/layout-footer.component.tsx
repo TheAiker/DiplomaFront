@@ -8,14 +8,17 @@ export function LayoutFooter(): JSX.Element {
         <div className="layout-footer">
             <div className="layout-footer__wrapper">
                 <div className="layout-footer__contacts">
+
                         Контактный телефон:
                         <br/>
-                        0 777 77777 "Placeholder"
+                        0 373 777 77777 "Placeholder"
                         <br/>
-                        0 777 77777 "Placeholder"
+                        0 373 777 77777 "Placeholder"
                         <br/>
 
-
+                </div>
+                <div className="layout-footer__admin-access">
+                    <NavLink activeClassName="layout-footer__link--active" className="layout-footer__link" to="/admin">Панель администратора</NavLink>
                 </div>
                 <div className="layout-footer__external-links">
                     <a className="layout-footer__external-link layout-footer__external-link--vk" href="https://vk.com/">

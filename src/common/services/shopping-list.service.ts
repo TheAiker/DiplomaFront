@@ -8,39 +8,45 @@ export type TShoppingItem = {
 
 export class ShoppingListService {
 
-    private _store$: BehaviorSubject<Array<TShoppingItem>> = new BehaviorSubject<Array<TShoppingItem>>([]);
-
-    contents$: Observable<Array<TShoppingItem>> = this._store$.asObservable();
+    contents$: BehaviorSubject<Array<TShoppingItem>> = new BehaviorSubject<Array<TShoppingItem>>([]);
 
     addProduct(product: ProductModel, amount: number = 1): void {
-        const currentContents = this._store$.value;
+        const currentContents = this.contents$.value;
         const foundShoppingItemIndex = currentContents.findIndex((item: TShoppingItem) => item.product.id === product.id);
 
-        // Index -1 means item matching search function wasn't found
-        if (foundShoppingItemIndex === -1) {
-            const newShoppingItem = { amount, product };
-            currentContents.push(newShoppingItem);
-        } else {
-            currentContents[foundShoppingItemIndex].amount += amount;
+        // Index -1 means no item matching the filter was found
+        if (foundShoppingItemIndex !== -1) {
+            this.setProductAmount(product, currentContents[foundShoppingItemIndex].amount + amount);
+            return;
         }
 
-        this._store$.next(currentContents);
+        const newContents = [...currentContents];
+        const newShoppingItem = { amount, product };
+        newContents.push(newShoppingItem);
+        this.contents$.next(newContents);
     }
 
     removeProduct(product: ProductModel): void {
-        const currentContents = this._store$.value;
-        const newCurrentContents = currentContents.filter((item: TShoppingItem) => item.product.id !== product.id);
+        const currentContents = this.contents$.value;
+        const newContents = currentContents.filter((item: TShoppingItem) => item.product.id !== product.id);
 
-        this._store$.next(newCurrentContents);
+        this.contents$.next(newContents);
     }
 
     setProductAmount(product: ProductModel, amount: number = 1): void {
-        const currentContents = this._store$.value;
+        const currentContents = this.contents$.value;
+        const newContents = [...currentContents];
         const foundShoppingItemIndex = currentContents.findIndex((item: TShoppingItem) => item.product.id === product.id);
 
         if (foundShoppingItemIndex !== -1) {
-            currentContents[foundShoppingItemIndex].amount = amount;
-            this._store$.next(currentContents);
+            const newShoppingItem = {
+                ...currentContents[foundShoppingItemIndex],
+                amount
+            };
+
+            newContents[foundShoppingItemIndex] = newShoppingItem;
+
+            this.contents$.next(newContents);
         }
     }
 

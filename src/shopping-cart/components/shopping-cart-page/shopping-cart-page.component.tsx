@@ -10,26 +10,24 @@ export function ShoppingCartPage(): JSX.Element {
     const cartItems = useObservable(shoppingListService.contents$, []);
 
     return (
-        <LayoutFull withBanner>
-            <div className="shopping-cart-page">
-                <h3>Корзина</h3>
+        <div className="shopping-cart-page">
+            <h3>Корзина</h3>
 
-                <div className="shopping-cart-page__wrapper">
-                    <div className="shopping-cart-page__cart">
-                        {cartItems.map((item: TShoppingItem) => (
-                            <ShoppingCartItem item={item} />
-                        ))}
+            <div className="shopping-cart-page__wrapper">
+                <div className="shopping-cart-page__cart">
+                    {cartItems.map((item: TShoppingItem) => (
+                        <ShoppingCartItem key={item.product.id} item={item} />
+                    ))}
 
-                        {!cartItems.length ? (
-                            <div>В вашей корзине нет товаров</div>
-                        ) : <></>}
-                    </div>
-
-                    {!!cartItems.length ? (
-                        <ShoppingCartCheckout cartItems={cartItems} />
+                    {!cartItems.length ? (
+                        <div>В вашей корзине нет товаров</div>
                     ) : <></>}
                 </div>
+
+                {!!cartItems.length ? (
+                    <ShoppingCartCheckout cartItems={cartItems} />
+                ) : <></>}
             </div>
-        </LayoutFull>
+        </div>
     );
 }

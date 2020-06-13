@@ -11,16 +11,19 @@ export function LayoutHeader(): JSX.Element {
     return (
         <div className="layout-header">
             <div className="layout-header__wrapper">
-                <span className="layout-header__title">Just an <span>OK</span> shop</span>
+                <div className="layout-header__title">
+                    <NavLink activeClassName="layout-header__link--active" className="layout-header__link layout-header__link--title" to="/products">
+                        <span className="layout-header__title-label">Just an <span>OK</span> shop</span>
+                    </NavLink>
+                </div>
 
                 <div className="layout-header__link-group">
                     <NavLink activeClassName="layout-header__link--active" className="layout-header__link" to="/products">Продукты</NavLink>
                     <NavLink activeClassName="layout-header__link--active" className="layout-header__link" to="/about-us">О нас</NavLink>
-                    <NavLink activeClassName="layout-header__link--active" className="layout-header__link" to="/admin">Админка</NavLink>
                 </div>
 
                 <div className="layout-header__shopping-cart">
-                    <NavLink className="layout-header__shopping-cart-link" key={Math.random()} to="/shopping-cart">
+                    <NavLink activeClassName="layout-header__link--active" className="layout-header__link" to="/shopping-cart">
                         <ShoppingCartIcon />
 
                         <div className="layout-header__shopping-cart-nudge">
