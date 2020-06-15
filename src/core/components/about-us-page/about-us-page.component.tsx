@@ -1,9 +1,31 @@
 import { Button, TextField } from 'common/components';
+import { feedbackTransport } from 'common/transports';
 import { LayoutFull } from 'core/components/layout-full';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+import { toast } from 'react-toastify';
 import './about-us.styles'
 
 export function AboutUsPage(): JSX.Element  {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const isAllowedToSend = !name || !email || !message;
+
+    const onSendFeedbackClickHandler = useCallback(async () => {
+        try {
+            await feedbackTransport.sendFeedback(name, email, message);
+
+            setName(() => '');
+            setEmail(() => '');
+            setMessage(() => '');
+
+            toast('Обратная связь успешно отправлена', { type: 'success' });
+        } catch (error) {
+            console.error(error);
+            toast('Произошла ошибка при отправке обратной связи', { type: 'error' });
+        }
+    }, [name, email, message]);
+
     return(
         <>
             <div className="about-us">
@@ -42,15 +64,27 @@ export function AboutUsPage(): JSX.Element  {
                     <br />
                     Работники службы доставки заносят товар по адресу в помещение (коридор). Дополнительная плата за подъем на этаж не взымается.<br />
                 </div>
+
                 <div className="about-us__feedback">
                     <span className="about-us__feedback-title">Обратная связь</span>
 
-                    <form action="mailto:aikersand@gmail.com" method="POST" name="emailForm">
+                    <div>
                         <TextField
                             className="about-us__feedback-field"
                             label="ФИО"
                             name="name"
                             placeholder="Иван Иванович Иванов"
+                            onChange={setName}
+                            value={name}
+                        />
+
+                        <TextField
+                            className="about-us__feedback-field"
+                            label="Email"
+                            name="email"
+                            placeholder="test@example.com"
+                            onChange={setEmail}
+                            value={email}
                         />
 
                         <TextField
@@ -58,11 +92,13 @@ export function AboutUsPage(): JSX.Element  {
                             label="Сообщение"
                             name="comment"
                             placeholder="Ваше сообщение"
+                            onChange={setMessage}
+                            value={message}
                             textArea
                         />
 
-                        <Button>Отправить</Button>
-                    </form>
+                        <Button disabled={isAllowedToSend} onClick={onSendFeedbackClickHandler}>Отправить</Button>
+                    </div>
                 </div>
 
             </div>
