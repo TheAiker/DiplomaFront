@@ -20,7 +20,6 @@ export function AdminCreateProduct(): JSX.Element {
     const [productName, setProductName] = useState('');
     const [categoryId, setCategoryId] = useState('-1');
     const [price, setPrice] = useState('');
-    const isAllowedToSave = categories.length > 0;
 
     useEffect(() => {
         if (categoryId === '-1' && categories.length > 0) {
@@ -123,7 +122,7 @@ export function AdminCreateProduct(): JSX.Element {
                 withPreview
             />
 
-            <Button disabled={isAllowedToSave} onClick={onCreateProductClickHandler}>Создать</Button>
+            <Button onClick={onCreateProductClickHandler}>Создать</Button>
         </div>
     );
 }
