@@ -15,4 +15,7 @@ export type TCreateProductRequest = {
 };
 
 export type TCreateProductResponse = TServerResponse<TProduct>;
+
+export type TDeleteProductResponse = TServerResponse<{}>;
+
 export type TGetProductsResponse = TServerResponse<Array<TProduct>>;

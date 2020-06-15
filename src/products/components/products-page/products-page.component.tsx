@@ -58,6 +58,10 @@ export function ProductsPage(): JSX.Element {
                     {filteredProducts.map((product: ProductModel) => (
                         <Product key={product.id} product={product} />
                     ))}
+
+                    {filteredProducts.length === 0 ? (
+                        <div className="products-page__products-empty">Нет доступных продуктов в выбранной категории</div>
+                    ) : <></>}
                 </div>
             </div>
         </div>

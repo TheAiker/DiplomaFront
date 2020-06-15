@@ -38,7 +38,7 @@ export function ShoppingCartItem(props: TShoppingCartItemProps): JSX.Element {
 
     return (
         <div className="shopping-cart-item">
-            <img className="shopping-cart-item__preview" src={item.product.productPreviewURL} alt="1"/>
+            <img className="shopping-cart-item__preview" src={item.product.productPreviewURL} />
 
             <div className="shopping-cart-item__info">
                 <div className="shopping-cart-item__info-title">

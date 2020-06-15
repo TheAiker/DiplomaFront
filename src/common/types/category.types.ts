@@ -6,4 +6,7 @@ export type TCategory = {
 };
 
 export type TCreateCategoryResponse = TServerResponse<TCategory>;
+
+export type TDeleteCategoryResponse = TServerResponse<{}>;
+
 export type TGetCategoriesResponse = TServerResponse<Array<TCategory>>;

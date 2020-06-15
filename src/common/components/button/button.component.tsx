@@ -5,13 +5,18 @@ import './button.styles';
 export type TButtonProps = {
     children: ReactNode;
     className?: string;
+    disabled?: boolean;
     onClick?: () => void;
 };
 
 export function Button(props: TButtonProps): JSX.Element {
-    const { children, className, onClick } = props;
+    const { children, className, disabled, onClick } = props;
 
     return (
-        <button className={cx('button', className)} onClick={onClick}>{children}</button>
+        <button
+            className={cx('button', { 'button--disabled': disabled }, className)}
+            disabled={disabled}
+            onClick={onClick}
+        >{children}</button>
     );
 }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { CategoryModel } from 'common/models';
-import { TCreateCategoryResponse, TGetCategoriesResponse, TCategory } from 'common/types';
+import { TCreateCategoryResponse, TDeleteCategoryResponse, TGetCategoriesResponse, TCategory } from 'common/types';
 
 export class CategoryTransport {
 
@@ -8,6 +8,10 @@ export class CategoryTransport {
         const { data: { data } } = await axios.post<TCreateCategoryResponse>('/api/categories/create', { name });
 
         return CategoryModel.fromServer(data);
+    }
+
+    async deleteCategory(category: CategoryModel): Promise<void> {
+        await axios.post<TDeleteCategoryResponse>('/api/categories/delete', { categoryId: category.id });
     }
 
     async getCategories(): Promise<Array<CategoryModel>> {

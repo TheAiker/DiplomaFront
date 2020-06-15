@@ -1,7 +1,7 @@
 import axios from 'axios';
 import FormData from 'form-data';
 import { ProductModel } from 'common/models';
-import { TCreateProductRequest, TCreateProductResponse, TGetProductsResponse, TProduct } from 'common/types';
+import { TCreateProductRequest, TCreateProductResponse, TDeleteProductResponse, TGetProductsResponse, TProduct } from 'common/types';
 
 export class ProductTransport {
 
@@ -9,6 +9,10 @@ export class ProductTransport {
         const { data: { data } } = await axios.post<TCreateProductResponse>('/api/products/create', request);
 
         return ProductModel.fromServer(data);
+    }
+
+    async deleteProduct(product: ProductModel): Promise<void> {
+        await axios.post<TDeleteProductResponse>('/api/products/delete', { productId: product.id });
     }
 
     async getProducts(): Promise<Array<ProductModel>> {

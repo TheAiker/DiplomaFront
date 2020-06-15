@@ -20,6 +20,7 @@ export function AdminCreateProduct(): JSX.Element {
     const [productName, setProductName] = useState('');
     const [categoryId, setCategoryId] = useState('-1');
     const [price, setPrice] = useState('');
+    const isAllowedToSave = categories.length > 0;
 
     useEffect(() => {
         if (categoryId === '-1' && categories.length > 0) {
@@ -97,7 +98,7 @@ export function AdminCreateProduct(): JSX.Element {
             <TextField
                 label="Цена"
                 name="productPrice"
-                placeholder="1337.69"
+                placeholder="1111.11"
                 onChange={setPrice}
                 value={price}
             />
@@ -122,7 +123,7 @@ export function AdminCreateProduct(): JSX.Element {
                 withPreview
             />
 
-            <Button onClick={onCreateProductClickHandler}>Создать</Button>
+            <Button disabled={isAllowedToSave} onClick={onCreateProductClickHandler}>Создать</Button>
         </div>
     );
 }
