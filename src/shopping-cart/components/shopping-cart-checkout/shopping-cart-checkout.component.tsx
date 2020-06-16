@@ -1,6 +1,7 @@
 import { Button } from 'common/components';
 import { TShoppingItem } from 'common/services';
 import React, { useMemo } from 'react';
+import { formatMoney } from 'utils';
 import './shopping-cart-checkout.styles';
 
 const shippingTax = 0.02;
@@ -23,17 +24,17 @@ export function ShoppingCartCheckout(props: ShoppingCartCheckoutProps): JSX.Elem
         <div className="shopping-cart-checkout">
             <div className="shopping-cart-checkout__info-line shopping-cart-checkout__info-line--secondary">
                 <span>Стоимость продуктов</span>
-                <span>{productsSum} р</span>
+                <span>{formatMoney(productsSum)}</span>
             </div>
 
             <div className="shopping-cart-checkout__info-line shopping-cart-checkout__info-line--secondary">
                 <span>Стоимость доставки</span>
-                <span>{shipmentSum} р</span>
+                <span>{formatMoney(shipmentSum)}</span>
             </div>
 
             <div className="shopping-cart-checkout__info-line shopping-cart-checkout__info-line--primary">
                 <span>Итого</span>
-                <span>{totalSum} р</span>
+                <span>{formatMoney(totalSum)}</span>
             </div>
 
             <Button className="shopping-cart-checkout__submit" onClick={onSubmit}>{submitLabel || 'Оплатить'}</Button>
