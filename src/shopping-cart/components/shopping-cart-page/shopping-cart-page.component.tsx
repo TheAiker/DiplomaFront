@@ -1,6 +1,10 @@
 import { LayoutFull } from 'core/components/layout-full';
-import React, { useCallback, useState } from 'react';
+import { NewOrderRequest } from 'common/requests';
 import { shoppingListService, TShoppingItem } from 'common/services';
+import { orderTransport } from 'common/transports';
+import React, { useCallback, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { ShoppingCartCheckout } from 'shopping-cart/components/shopping-cart-checkout';
 import { ShoppingCartDetails } from 'shopping-cart/components/shopping-cart-details';
 import { ShoppingCartItem } from 'shopping-cart/components/shopping-cart-item';
@@ -14,12 +18,31 @@ enum ShoppingCartStep {
 
 export function ShoppingCartPage(): JSX.Element {
     const cartItems = useObservable(shoppingListService.contents$, []);
+    const history = useHistory();
     const [step, setStep] = useState<ShoppingCartStep>(ShoppingCartStep.EditCart);
+    const [request, setRequest] = useState<NewOrderRequest | null>(null);
     const isDetails = step === ShoppingCartStep.Details;
 
     const onContinueToDetailsClickHandler = useCallback(() => {
         setStep(() => ShoppingCartStep.Details);
     }, []);
+
+    const onSubmitOrderClickHandler = useCallback(async () => {
+        try {
+            if (!request) {
+                toast('Заполните форму', { type: 'warning' });
+                return;
+            }
+
+            await orderTransport.newOrder(request);
+
+            history.push('/products');
+            toast('Заказ успешно создан', { type: 'success' });
+        } catch (error) {
+            console.error(error);
+            toast('Не удалось создать заказ', { type: 'error' });
+        }
+    }, [request]);
 
     return (
         <div className="shopping-cart-page">
@@ -27,11 +50,11 @@ export function ShoppingCartPage(): JSX.Element {
             {isDetails ? (
                 <div className="shopping-cart-page__wrapper">
                     <div className="shopping-cart-page__cart">
-                        <ShoppingCartDetails />
+                        <ShoppingCartDetails cartItems={cartItems} onRequestUpdate={setRequest} />
                     </div>
 
                     {!!cartItems.length ? (
-                        <ShoppingCartCheckout cartItems={cartItems} onSubmit={onContinueToDetailsClickHandler} />
+                        <ShoppingCartCheckout cartItems={cartItems} onSubmit={onSubmitOrderClickHandler} />
                     ) : <></>}
                 </div>
             ) : (
@@ -54,3 +77,4 @@ export function ShoppingCartPage(): JSX.Element {
         </div>
     );
 }
+

@@ -19,7 +19,7 @@ export function AdminLogin(props: TAdminLoginProps): JSX.Element {
         event.preventDefault();
 
         if (!password) {
-            toast('Введите пароль', { type: 'error' });
+            toast('Введите пароль', { type: 'warning' });
             return;
         }
 

@@ -10,7 +10,7 @@ export function AdminCreateCategory(): JSX.Element {
 
     const onCreateCategoryClickHandler = useCallback(async () => {
         if (!categoryName) {
-            toast('Укажите название категории', { type: 'error' });
+            toast('Укажите название категории', { type: 'warning' });
             return;
         }
 

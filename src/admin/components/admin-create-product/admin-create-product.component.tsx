@@ -33,27 +33,27 @@ export function AdminCreateProduct(): JSX.Element {
 
     const onCreateProductClickHandler = useCallback(async () => {
         if (!productName) {
-            toast('Укажите название продукта', { type: 'error' });
+            toast('Укажите название продукта', { type: 'warning' });
             return;
         }
 
         if (!price) {
-            toast('Укажите цену продукта', { type: 'error' });
+            toast('Укажите цену продукта', { type: 'warning' });
             return;
         }
 
         if (isNaN(+price)) {
-            toast('Укажите валидную цену продукта', { type: 'error' });
+            toast('Укажите валидную цену продукта', { type: 'warning' });
             return;
         }
 
         if (categoryId === '-1') {
-            toast('Выберите категорию продукта', { type: 'error' });
+            toast('Выберите категорию продукта', { type: 'warning' });
             return;
         }
 
         if (!image) {
-            toast('Сперва выберите картинку для превью продукта', { type: 'error' });
+            toast('Сперва выберите картинку для превью продукта', { type: 'warning' });
             return;
         }
 
