@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { TSendFeedbackResponse } from 'common/types';
+import { TSendFeedbackRequest, TSendFeedbackResponse } from 'common/types';
+import { BaseTransport } from './base.transport';
 
-export class FeedbackTransport {
+export class FeedbackTransport extends BaseTransport {
 
     async sendFeedback(name: string, email: string, message: string): Promise<void> {
-        await axios.post<TSendFeedbackResponse>('/api/feedback/send', { name, email, message });
+        await this.post<TSendFeedbackRequest, TSendFeedbackResponse>('/api/feedback/send', { name, email, message });
     }
 
 }

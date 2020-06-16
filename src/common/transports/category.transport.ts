@@ -1,23 +1,25 @@
 import axios from 'axios';
 import { CategoryModel } from 'common/models';
-import { TCreateCategoryResponse, TDeleteCategoryResponse, TGetCategoriesResponse, TCategory } from 'common/types';
+import { TCreateCategoryRequest, TCreateCategoryResponse, TDeleteCategoryRequest, TDeleteCategoryResponse, TGetCategoriesResponse, TCategory } from 'common/types';
+import { BaseTransport } from './base.transport';
 
-export class CategoryTransport {
+export class CategoryTransport extends BaseTransport {
 
     async createCategory(name: string): Promise<CategoryModel> {
-        const { data: { data } } = await axios.post<TCreateCategoryResponse>('/api/categories/create', { name });
+        const data = await this.post<TCreateCategoryRequest, TCreateCategoryResponse>('/api/categories/create', { name });
 
         return CategoryModel.fromServer(data);
     }
 
     async deleteCategory(category: CategoryModel): Promise<void> {
-        await axios.post<TDeleteCategoryResponse>('/api/categories/delete', { categoryId: category.id });
+        await this.post<TDeleteCategoryRequest, TDeleteCategoryResponse>('/api/categories/delete', { categoryId: category.id });
     }
 
     async getCategories(): Promise<Array<CategoryModel>> {
-        const { data: { data } } = await axios.get<TGetCategoriesResponse>('/api/categories');
+        const data = await this.get<TGetCategoriesResponse>('/api/categories');
 
         return data.map((data: TCategory) => CategoryModel.fromServer(data));
     }
+
 }
 export const categoryTransport = new CategoryTransport();

@@ -19,11 +19,11 @@ export function Product(props: TProductProps): JSX.Element {
 
     return (
         <div className="product" onClick={onProductClickHandler}>
-            <img className="product__image" src={product.productPreviewURL} alt="1"/>
+            <img className="product__image" src={product.productPreviewURL} />
 
             <div className="product__info">
                 <span className="product__info-name">{product.name}</span>
-                <span className="product__info-price">${formatMoney(product.price)}</span>
+                <span className="product__info-price">{formatMoney(product.price)}</span>
             </div>
         </div>
     );

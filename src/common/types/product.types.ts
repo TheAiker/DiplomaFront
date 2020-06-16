@@ -1,4 +1,4 @@
-import { TImage, TServerResponse } from './common.types';
+import { TImage } from './common.types';
 import { TCategory } from './category.types';
 
 export type TProduct = {
@@ -14,8 +14,14 @@ export type TCreateProductRequest = {
     price: number;
 };
 
-export type TCreateProductResponse = TServerResponse<TProduct>;
+export type TCreateProductResponse = TProduct;
 
-export type TDeleteProductResponse = TServerResponse<{}>;
+export type TDeleteProductRequest = {
+    productId: number;
+};
+export type TDeleteProductResponse = {};
 
-export type TGetProductsResponse = TServerResponse<Array<TProduct>>;
+export type TGetProductsResponse = Array<TProduct>;
+
+export type TUploadPreviewImageRequest = {};
+export type TUploadPreviewImageResponse = {};

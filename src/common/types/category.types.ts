@@ -1,12 +1,16 @@
-import { TServerResponse } from './common.types';
-
 export type TCategory = {
     id: number;
     name: string;
 };
 
-export type TCreateCategoryResponse = TServerResponse<TCategory>;
+export type TCreateCategoryRequest = {
+    name: string;
+};
+export type TCreateCategoryResponse = TCategory;
 
-export type TDeleteCategoryResponse = TServerResponse<{}>;
+export type TDeleteCategoryRequest = {
+    categoryId: number;
+};
+export type TDeleteCategoryResponse = {};
 
-export type TGetCategoriesResponse = TServerResponse<Array<TCategory>>;
+export type TGetCategoriesResponse = Array<TCategory>;

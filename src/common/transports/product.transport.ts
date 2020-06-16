@@ -1,22 +1,23 @@
 import axios from 'axios';
 import FormData from 'form-data';
 import { ProductModel } from 'common/models';
-import { TCreateProductRequest, TCreateProductResponse, TDeleteProductResponse, TGetProductsResponse, TProduct } from 'common/types';
+import { TCreateProductRequest, TCreateProductResponse, TDeleteProductRequest, TDeleteProductResponse, TGetProductsResponse, TProduct, TUploadPreviewImageResponse } from 'common/types';
+import { BaseTransport } from './base.transport';
 
-export class ProductTransport {
+export class ProductTransport extends BaseTransport {
 
     async createProduct(request: TCreateProductRequest): Promise<ProductModel> {
-        const { data: { data } } = await axios.post<TCreateProductResponse>('/api/products/create', request);
+        const data = await this.post<TCreateProductRequest, TCreateProductResponse>('/api/products/create', request);
 
         return ProductModel.fromServer(data);
     }
 
     async deleteProduct(product: ProductModel): Promise<void> {
-        await axios.post<TDeleteProductResponse>('/api/products/delete', { productId: product.id });
+        await this.post<TDeleteProductRequest, TDeleteProductResponse>('/api/products/delete', { productId: product.id });
     }
 
     async getProducts(): Promise<Array<ProductModel>> {
-        const { data: { data } } = await axios.get<TGetProductsResponse>('/api/products');
+        const data = await this.get<TGetProductsResponse>('/api/products');
 
         return data.map((data: TProduct) => ProductModel.fromServer(data));
     }
@@ -32,7 +33,7 @@ export class ProductTransport {
             'Content-Type': 'multipart/form-data'
         };
 
-        await axios.post('/api/products/preview-upload', formData, { headers });
+        await this.post<FormData, TUploadPreviewImageResponse>('/api/products/preview-upload', formData, { headers });
     }
 
 }
